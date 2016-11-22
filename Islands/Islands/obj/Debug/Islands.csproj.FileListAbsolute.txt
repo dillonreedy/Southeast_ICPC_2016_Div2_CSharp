@@ -1,0 +1,6 @@
+c:\users\dreedy\documents\visual studio 2015\Projects\Islands\Islands\bin\Debug\Islands.exe.config
+c:\users\dreedy\documents\visual studio 2015\Projects\Islands\Islands\obj\Debug\Islands.csprojResolveAssemblyReference.cache
+c:\users\dreedy\documents\visual studio 2015\Projects\Islands\Islands\bin\Debug\Islands.exe
+c:\users\dreedy\documents\visual studio 2015\Projects\Islands\Islands\bin\Debug\Islands.pdb
+c:\users\dreedy\documents\visual studio 2015\Projects\Islands\Islands\obj\Debug\Islands.exe
+c:\users\dreedy\documents\visual studio 2015\Projects\Islands\Islands\obj\Debug\Islands.pdb

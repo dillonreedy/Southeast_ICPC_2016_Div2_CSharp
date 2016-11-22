@@ -1,0 +1,172 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+
+namespace Islands
+{
+  public class Point
+  {
+    public int x, y;
+
+    public Point(int x, int y)
+    {
+      this.x = x;
+      this.y = y;
+    }
+
+    public bool IsEqual(Point otherPt)
+    {
+      return this.x == otherPt.x && this.y == otherPt.y;
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      new Program().doit();
+    }
+
+    public void doit()
+    {
+      String[] line = Console.ReadLine().Split(' ');
+      int r = Int32.Parse(line[0]);
+      int c = Int32.Parse(line[1]);
+
+      char[,] grid = new char[r, c];
+
+      for (int i = 0; i < r; i++)
+      {
+        char[] values = Console.ReadLine().ToCharArray();
+        for (int j = 0; j < c; j++) grid[i, j] = values[j];
+      }
+
+      if (!ContainsChar(grid, r, c, 'L'))
+      {
+        Console.WriteLine("0");
+      }
+      else
+      {
+        List<Point> pts = GetAllPointsOfChar(grid, r, c, 'L');
+        Console.WriteLine(GetNumberOfIslands(grid, r, c, pts));
+      }
+
+    }
+
+    public int GetNumberOfIslands(char[,] grid, int r, int c, List<Point> pts)
+    {
+      bool[,] IsConnected = new bool[pts.Count, pts.Count];
+
+      for (int i = 0; i < pts.Count; i++)
+        for (int j = i + 1; j < pts.Count; j++)
+          if (CanConnect(pts[i], pts[j], grid, r, c))
+            IsConnected[i, j] = true;
+
+      List<List<Point>> groups = new List<List<Point>>();
+      Dictionary<Point, bool> beenHere = new Dictionary<Point, bool>();
+      foreach (Point pt in pts) beenHere.Add(pt, false);
+
+      int index = 0;
+      foreach (Point curPt in pts)
+      {
+        List<Point> curGroup = new List<Point>();
+        if (!beenHere[curPt]) curGroup = GetCurrentGroup(pts, curPt, index, ref beenHere, IsConnected);
+        if (curGroup.Count != 0) groups.Add(curGroup);
+        beenHere[curPt] = true;
+        index++;
+      }
+      return groups.Count;
+    }
+
+    public List<Point> AddToGroup(List<Point> pts, Point curPt, int index, ref Dictionary<Point, bool> beenHere, bool[,] IsConnected)
+    {
+      List<Point> curGroup = new List<Point>();
+      curGroup.Add(curPt);
+      for (int i = 0; i < pts.Count; i++)
+      {
+        if (IsConnected[index, i])
+        {
+          curGroup.Add(pts[i]);
+          beenHere[pts[i]] = true;
+        }
+      }
+
+      return curGroup;
+    }
+    
+    public bool CanConnect(Point start, Point end, char[,] grid, int r, int c)
+    {
+
+      Stack<Point> moves = new Stack<Point>();
+      moves.Push(start);
+      bool[,] beenHere = new bool[r, c];
+
+      while (moves.Count != 0)
+      {
+        Point curLoc = moves.Pop();
+        if (!beenHere[curLoc.x, curLoc.y]) moves = AddMoves(curLoc, moves, r, c, grid);
+        if (curLoc.IsEqual(end)) return true;
+        beenHere[curLoc.x, curLoc.y] = true;
+      }
+      return false;
+    }
+
+    public Stack<Point> AddMoves(Point curLoc, Stack<Point> curMoves, int r, int c, char[,] grid)
+    {
+      Point upMove = new Point(curLoc.x, curLoc.y + 1);
+      Point downMove = new Point(curLoc.x, curLoc.y - 1);
+      Point rightMove = new Point(curLoc.x + 1, curLoc.y);
+      Point leftMove = new Point(curLoc.x - 1, curLoc.y);
+
+      Stack<Point> newMoves = new Stack<Point>();
+      foreach (Point pt in curMoves) newMoves.Push(pt);
+
+      if (InBorders(upMove, r, c))
+        if (!grid[upMove.x, upMove.y].Equals('W'))
+          newMoves.Push(upMove);
+
+      if (InBorders(downMove, r, c))
+        if (!grid[downMove.x, downMove.y].Equals('W'))
+          newMoves.Push(downMove);
+
+      if (InBorders(rightMove, r, c))
+        if (!grid[rightMove.x, rightMove.y].Equals('W'))
+          newMoves.Push(rightMove);
+
+      if (InBorders(leftMove, r, c))
+        if (!grid[leftMove.x, leftMove.y].Equals('W'))
+          newMoves.Push(leftMove);
+
+      return newMoves;
+
+    }
+
+    public bool InBorders(Point givenPt, int r, int c)
+    {
+      return (0 <= givenPt.x && givenPt.x < r && 0 <= givenPt.y && givenPt.y < c);
+    }
+
+    public bool ContainsChar(char[,] grid, int r, int c, char ch)
+    {
+      for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+          if (grid[i, j] == ch) return true;
+
+      return false;
+    }
+
+    public List<Point> GetAllPointsOfChar(char[,] grid, int r, int c, char ch)
+    {
+      List<Point> pts = new List<Point>();
+
+      for (int i = 0; i < r; i++)
+        for (int j = 0; j < c; j++)
+          if (grid[i, j] == ch) pts.Add(new Point(i, j));
+
+      return pts;
+    }
+  }
+}

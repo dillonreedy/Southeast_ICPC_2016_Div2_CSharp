@@ -1,0 +1,6 @@
+c:\users\dreedy\documents\visual studio 2015\Projects\ZigZag\ZigZag\bin\Debug\ZigZag.exe.config
+c:\users\dreedy\documents\visual studio 2015\Projects\ZigZag\ZigZag\bin\Debug\ZigZag.exe
+c:\users\dreedy\documents\visual studio 2015\Projects\ZigZag\ZigZag\bin\Debug\ZigZag.pdb
+c:\users\dreedy\documents\visual studio 2015\Projects\ZigZag\ZigZag\obj\Debug\ZigZag.csprojResolveAssemblyReference.cache
+c:\users\dreedy\documents\visual studio 2015\Projects\ZigZag\ZigZag\obj\Debug\ZigZag.exe
+c:\users\dreedy\documents\visual studio 2015\Projects\ZigZag\ZigZag\obj\Debug\ZigZag.pdb
