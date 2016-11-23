@@ -1,0 +1,6 @@
+c:\users\dreedy\documents\visual studio 2015\Projects\Buggy\Buggy\bin\Debug\Buggy.exe.config
+c:\users\dreedy\documents\visual studio 2015\Projects\Buggy\Buggy\bin\Debug\Buggy.exe
+c:\users\dreedy\documents\visual studio 2015\Projects\Buggy\Buggy\bin\Debug\Buggy.pdb
+c:\users\dreedy\documents\visual studio 2015\Projects\Buggy\Buggy\obj\Debug\Buggy.csprojResolveAssemblyReference.cache
+c:\users\dreedy\documents\visual studio 2015\Projects\Buggy\Buggy\obj\Debug\Buggy.exe
+c:\users\dreedy\documents\visual studio 2015\Projects\Buggy\Buggy\obj\Debug\Buggy.pdb
